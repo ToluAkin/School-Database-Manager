@@ -1,6 +1,6 @@
 import config from "./config";
 
-class Data {
+export default class Data {
     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
         const url = config.apiBaseUrl + path;
 
@@ -33,6 +33,17 @@ class Data {
             throw new Error();
         }
     }
-}
 
-export default Data;
+    async createUser(user) {
+        const response = await this.api('/users', 'POST', user);
+        if (response.status === 201) {
+            return [];
+        } else if (response.status === 400) {
+            return response.json().then(data => {
+                return data.errors;
+            });
+        } else {
+            throw new Error();
+        }
+    }
+}

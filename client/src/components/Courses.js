@@ -45,7 +45,7 @@ class Courses extends Component {
                 <div className="grid-33">
                     <Link
                         className="course--module course--add--module"
-                        to="/create"
+                        to="/courses/create"
                     >
                         <h3 className="course--add--title">
                             <svg

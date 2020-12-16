@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
-export default class UserSignUp extends Component {
+class UserSignUp extends Component {
     state = {
         firstName: '',
         lastName: '',
@@ -11,6 +11,7 @@ export default class UserSignUp extends Component {
         confirmPassword: '',
         errors: []
     }
+
     render() {
         const {
             firstName,
@@ -115,20 +116,31 @@ export default class UserSignUp extends Component {
             confirmPassword,
         }
 
-        context.data.createUser(user)
-            .then( errors => {
-                if (errors.length) {
-                    this.setState({ errors });
-                } else {
-                    context.actions.signIn(emailAddress, password)
-                        .then(() => {
-                            this.props.history.push('/')
-                        })
-                }
-            })
+        console.log(user)
+        if (user.password !== user.confirmPassword) {
+            this.setState({ errors: ['Password do not match']});
+        } else {
+            context.data.createUser(user)
+                .then( errors => {
+                    if (errors.length) {
+                        this.setState({ errors });
+                    } else {
+                        context.actions.signIn(emailAddress, password)
+                            .then(() => {
+                                this.props.history.push('/')
+                            })
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                    this.props.history.push('/error');
+                })
+        }
     }
 
     cancel = () => {
         this.props.history.push('/');
     }
 }
+
+export default UserSignUp;

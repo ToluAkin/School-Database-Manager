@@ -6,7 +6,7 @@ const Context = React.createContext();
 
 export class Provider extends Component {
     state = {
-        authenticatedUser: Cookies.getJSON("authenticatedUser") || null,
+        authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
     };
 
     constructor() {
@@ -36,7 +36,7 @@ export class Provider extends Component {
         const user = await this.data.getUser(emailAddress, password);
 
         if (user !== null) {
-            user.password = password;
+            // user.password = password;
             this.setState(() => {
                 return {
                     authenticatedUser: user
@@ -49,7 +49,11 @@ export class Provider extends Component {
     }
 
     signOut = () => {
-        this.setState({ authenticatedUser: null });
+        this.setState(() => {
+            return {
+                authenticatedUser: null
+            }
+        });
         Cookies.remove('authenticatedUser');
     }
 }
@@ -58,7 +62,7 @@ export const Consumer = Context.Consumer;
 
 /**
  * A higher-order component that wraps the provided component in a Context Consumer component.
- * @param {class} Component - A React component.
+ * @param {function({context: *}): *} Component - A React component.
  * @returns {function} A higher-order component.
  */
 

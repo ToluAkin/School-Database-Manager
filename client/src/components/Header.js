@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 
 class Header extends React.PureComponent {
     render() {
-        const { context } = this.props;
+        const context = this.props;
         const authUser = context.authenticatedUser;
 
         return (
             <div className="header">
                 <div className="bounds">
-                    <h1 className="header--logo">Courses</h1>
+                    <Link to='/' >
+                        <h1 className="header--logo">Courses</h1>
+                    </Link>
                     <nav>
                         {
                             authUser ?
@@ -20,7 +22,7 @@ class Header extends React.PureComponent {
                             :
                             <React.Fragment>
                                 <Link className="signup" to="/signup">Sign Up</Link>
-                                <Link className="signin" to="/signup">Sign In</Link>
+                                <Link className="signin" to="/signin">Sign In</Link>
                             </React.Fragment>
                         }
                     </nav>
