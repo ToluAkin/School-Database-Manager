@@ -1,27 +1,49 @@
 import React, { Component } from "react";
 import Form from "./Form";
+import config from "../config";
+const axios = require("axios");
 
-class CreateCourse extends Component {
+class UpdateCourse extends Component {
     state = {
         title: '',
         description: '',
         estimatedTime: '',
         materialsNeeded: '',
+        id: this.props.match.params.id,
         errors: []
     }
 
-    render() {
-        const { context } = this.props;
-        const { title, description, estimatedTime, materialsNeeded, errors } = this.state;
+    componentDidMount() {
+        this.GetCourse();
+    }
 
+
+    GetCourse = () => {
+        const id = this.props.match.params.id;
+        axios.get(`${config.apiBaseUrl}/courses/${id}`)
+            .then((response) => {
+                this.setState({
+                    title: response.data.title,
+                    description: response.data.description,
+                    estimatedTime: response.data.estimatedTime,
+                    materialsNeeded: response.data.materialsNeeded
+                })
+            })
+            .catch((error) => {
+                console.log('Error fetching data', error);
+            });
+    }
+
+    render() {
+        const { title, description, estimatedTime, materialsNeeded, errors } = this.state;
         return (
             <div className='bounds course--detail'>
-                <h1>Create Course</h1>
+                <h1>Update Course</h1>
                 <Form
                     cancel={this.cancel}
                     errors={errors}
                     submit={this.submit}
-                    submitButtonText="Create Course"
+                    submitButtonText="Update Course"
                     elements={() => (
                         <React.Fragment>
                             <div className="grid-66">
@@ -38,7 +60,7 @@ class CreateCourse extends Component {
                                             onChange={this.change}
                                         />
                                     </div>
-                                    <p>By {context.authenticatedUser.firstName} {context.authenticatedUser.lastName}</p>
+                                    <p>By Joe Smith</p>
                                 </div>
                                 <div className="course--description">
                                     <div>
@@ -107,15 +129,15 @@ class CreateCourse extends Component {
 
     submit = () => {
         const { context } = this.props;
-        const { title, description, estimatedTime, materialsNeeded } = this.state;
+        const { title, description, estimatedTime, materialsNeeded, id } = this.state;
 
         const emailAddress = context.authenticatedUser.emailAddress;
         const password = context.authenticatedUser.password;
         const userId = context.authenticatedUser.id;
-        const course = { title, description, estimatedTime, materialsNeeded, userId };
+        const course = { title, description, estimatedTime, materialsNeeded, id, userId };
 
-        context.data.createCourse(course, emailAddress, password)
-            .then( errors => {
+        context.data.updateCourse(course, emailAddress, password)
+            .then((errors) => {
                 if (errors.length > 0) {
                     this.setState({ errors });
                 } else {
@@ -129,8 +151,8 @@ class CreateCourse extends Component {
     }
 
     cancel = () => {
-        this.props.history.push('/');
+        this.props.history.push(`/courses/${this.props.match.params.id}`);
     }
 }
 
-export default CreateCourse;
+export default UpdateCourse;

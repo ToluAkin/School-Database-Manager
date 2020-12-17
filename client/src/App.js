@@ -38,7 +38,7 @@ function App() {
               <Route path="/signin" component={UserSignInWithContext} />
               <Route path="/signup" component={UserSignUpWithContext} />
               <Route path="/signout" component={UserSignOutWithContext} />
-              {/*<Route path="/courses/:id" component={CourseDetail} />*/}
+              <Route path="/courses/:id" component={CourseDetail} />
               <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
               <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
               <Route path="/error" component={Error} />
