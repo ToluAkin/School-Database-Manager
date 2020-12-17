@@ -122,7 +122,7 @@ class UserSignUp extends Component {
         } else {
             context.data.createUser(user)
                 .then( errors => {
-                    if (errors.length) {
+                    if (errors.length > 0) {
                         this.setState({ errors });
                     } else {
                         context.actions.signIn(emailAddress, password)
