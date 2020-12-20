@@ -30,7 +30,13 @@ class UpdateCourse extends Component {
                 })
             })
             .catch((error) => {
-                console.log('Error fetching data', error);
+                if (error.response.status === 404) {
+                    this.props.history.push('/notfound');
+                } else if (error.response.status === 500) {
+                    this.props.history.push('/error');
+                } else {
+                    console.log('Error fetching data', error);
+                }
             });
     }
 
@@ -141,7 +147,7 @@ class UpdateCourse extends Component {
                 if (errors.length > 0) {
                     this.setState({ errors });
                 } else {
-                    this.props.history.push('/')
+                    this.props.history.push(`/courses/${this.props.match.params.id}`)
                 }
             })
             .catch((error) => {

@@ -78,8 +78,11 @@ class UserSignIn extends Component {
                 }
             })
             .catch((error) => {
-                console.error(error);
-                this.props.history.push('/error');
+                if (error.response.status === 500) {
+                    this.props.history.push('/error');
+                } else {
+                    console.log('Error fetching data', error);
+                }
             });
     }
 

@@ -39,5 +39,15 @@ module.exports = (sequelize) => {
     userId: DataTypes.INTEGER
   }, { sequelize });
 
+  Course.associate = (models) => {
+    Course.belongsTo(models.User, {
+      as: 'user',
+      foreignKey: {
+        fieldName: 'userId',
+        allowNull: false
+      },
+    });
+  };
+
   return Course;
 };

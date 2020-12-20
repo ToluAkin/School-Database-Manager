@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import config from "../config";
+import ReactMarkdown from 'react-markdown'
 const axios = require("axios");
 
 class CourseDetail extends Component {
@@ -9,6 +10,7 @@ class CourseDetail extends Component {
 
         this.state = {
             courseDetail: [],
+            user: []
         }
     }
 
@@ -25,11 +27,40 @@ class CourseDetail extends Component {
                 })
             })
             .catch((error) => {
-                console.log('Error fetching data', error);
+                if (error.response.status === 404) {
+                    this.props.history.push('/notfound');
+                } else if (error.response.status === 500) {
+                    this.props.history.push('/error');
+                } else {
+                    console.log('Error fetching data', error);
+                }
             });
     }
 
+    deleteCourse(e) {
+        e.preventDefault();
+        const { context } = this.props;
+        const id = this.props.match.params.id;
+
+        const emailAddress = context.authenticatedUser.emailAddress;
+        const password = context.authenticatedUser.password;
+
+        context.data.deleteCourse(id, emailAddress, password)
+            .then((errors) => {
+                if (errors.length > 0) {
+                    this.setState({ errors });
+                } else  {
+                    this.props.history.push('/');
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+                this.props.history.push('/error');
+            })
+    }
+
     render() {
+        const { context } = this.props;
         let course = this.state.courseDetail;
 
         return (
@@ -37,11 +68,17 @@ class CourseDetail extends Component {
                 <div className="actions--bar">
                     <div className="bounds">
                         <div className="grid-100">
-                            <span>
-                                <Link className="button" to={`/courses/${course.id}/update`}>Update Course</Link>
-                                <Link className="button" to="#">Delete Course</Link>
-                            </span>
-                            <Link className="button button-secondary" to="/">Return to List</Link>
+                            { context.authenticatedUser.id === course.userId ?
+                                <span>
+                                    <Link className="button" to={`/course-update/${course.id}`}>Update Course</Link>
+                                    <button className="button" onClick={(e) => {
+                                        if (window.confirm('Are you sure you want to delete this course?')) this.deleteCourse(e)
+                                    }}>Delete Course</button>
+                                    <Link className="button button-secondary" to="/">Return to List</Link>
+                                </span>
+                            :
+                                <Link className="button button-secondary" to="/">Return to List</Link>
+                            }
                         </div>
                     </div>
                 </div>
@@ -53,7 +90,7 @@ class CourseDetail extends Component {
                             <p>By Joe Smith</p>
                         </div>
                         <div className="course--description">
-                            <p>{course.description}</p>
+                            <ReactMarkdown>{course.description}</ReactMarkdown>
                         </div>
                     </div>
                     <div className="grid-25 grid-right">
@@ -66,7 +103,7 @@ class CourseDetail extends Component {
                                 <li className="course--stats--list--item">
                                     <h4>Materials Needed</h4>
                                     <ul>
-                                        <li>{course.materialsNeeded}</li>
+                                        <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
                                     </ul>
                                 </li>
                             </ul>

@@ -25,7 +25,11 @@ class Courses extends Component {
                 })
             })
             .catch((error) => {
-                console.log('Error fetching data', error);
+                if (error.response.status === 500) {
+                    this.props.history.push('/error');
+                } else {
+                    console.log('Error fetching data', error);
+                }
             });
     };
 
@@ -45,7 +49,7 @@ class Courses extends Component {
                 <div className="grid-33">
                     <Link
                         className="course--module course--add--module"
-                        to="/courses/create"
+                        to="/create-course"
                     >
                         <h3 className="course--add--title">
                             <svg

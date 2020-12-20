@@ -6,14 +6,13 @@ const router = express.Router();
 // Handler function to wrap each route.
 const { asyncHandler } = require('../middleware/async-handler');
 const { authenticateUser } = require('../middleware/auth-user');
-const { Course } = require('../models');
+const { User, Course } = require('../models');
 
 // Returns a list of courses (including the user that owns each course)
 router.get('/courses', asyncHandler(async (req, res) => {
     const courses = await Course.findAll({
-        attributes: {
-            exclude: ["createdAt", "updatedAt"]
-        }
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+        include: [{ model: User, as: 'user', attributes: ['firstName', 'lastName']}],
     });
     res.status(200).json(courses);
 }));

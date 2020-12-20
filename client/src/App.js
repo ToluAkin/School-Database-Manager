@@ -7,6 +7,7 @@ import {
 
 import NotFound from "./components/NotFound";
 import Error from "./components/Error";
+import Forbidden from "./components/Forbidden";
 import Header from "./components/Header";
 import UserSignUp from "./components/UserSignUp";
 import UserSignIn from "./components/UserSignIn";
@@ -24,6 +25,7 @@ const HeaderWithContext = withContext(Header);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignOutWithContext = withContext(UserSignOut);
+const CourseDetailWithContext = withContext(CourseDetail)
 const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 
@@ -38,11 +40,12 @@ function App() {
               <Route path="/signin" component={UserSignInWithContext} />
               <Route path="/signup" component={UserSignUpWithContext} />
               <Route path="/signout" component={UserSignOutWithContext} />
-              <Route path="/courses/:id" component={CourseDetail} />
-              <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
-              <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
+              <Route path="/courses/:id" component={CourseDetailWithContext} />
+              <PrivateRoute path="/create-course" component={CreateCourseWithContext} />
+              <PrivateRoute path="/course-update/:id" component={UpdateCourseWithContext} />
+              <Route path="/forbidden" component={Forbidden} />
               <Route path="/error" component={Error} />
-              <Route component={NotFound} />
+              <Route path="/notfound" component={NotFound} />
           </Switch>
         </div>
       </Router>
