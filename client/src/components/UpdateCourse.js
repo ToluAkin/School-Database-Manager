@@ -19,15 +19,20 @@ class UpdateCourse extends Component {
 
 
     GetCourse = () => {
+        const { context } = this.props;
         const id = this.props.match.params.id;
         axios.get(`${config.apiBaseUrl}/courses/${id}`)
             .then((response) => {
-                this.setState({
-                    title: response.data.title,
-                    description: response.data.description,
-                    estimatedTime: response.data.estimatedTime,
-                    materialsNeeded: response.data.materialsNeeded
-                })
+                if (response.data.userId !== context.authenticatedUser.id) {
+                    this.props.history.push('/forbidden');
+                } else {
+                    this.setState({
+                        title: response.data.title,
+                        description: response.data.description,
+                        estimatedTime: response.data.estimatedTime,
+                        materialsNeeded: response.data.materialsNeeded
+                    })
+                }
             })
             .catch((error) => {
                 if (error.response.status === 404) {
