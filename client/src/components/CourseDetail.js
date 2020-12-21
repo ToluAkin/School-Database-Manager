@@ -24,6 +24,7 @@ class CourseDetail extends Component {
             .then((response) => {
                 this.setState({
                     courseDetail: response.data,
+                    user: response.data.user
                 })
             })
             .catch((error) => {
@@ -87,7 +88,7 @@ class CourseDetail extends Component {
                         <div className="course--header">
                             <h4 className="course--label">Course</h4>
                             <h3 className="course--title">{course.title}</h3>
-                            <p>By Joe Smith</p>
+                            <p>By {this.state.user.firstName} {this.state.user.lastName}</p>
                         </div>
                         <div className="course--description">
                             <ReactMarkdown>{course.description}</ReactMarkdown>

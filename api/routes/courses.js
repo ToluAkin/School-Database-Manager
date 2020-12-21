@@ -11,8 +11,7 @@ const { User, Course } = require('../models');
 // Returns a list of courses (including the user that owns each course)
 router.get('/courses', asyncHandler(async (req, res) => {
     const courses = await Course.findAll({
-        attributes: { exclude: ["createdAt", "updatedAt"] },
-        include: [{ model: User, as: 'user', attributes: ['firstName', 'lastName']}],
+        attributes: { exclude: ["createdAt", "updatedAt"] }
     });
     res.status(200).json(courses);
 }));
@@ -22,9 +21,8 @@ router.get('/courses/:id', asyncHandler(async (req, res) => {
     let course;
     try {
         course = await Course.findByPk(req.params.id, {
-            attributes: {
-                exclude: ["createdAt", "updatedAt"]
-            }
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+            include: [{ model: User, as: 'user', attributes: ['firstName', 'lastName']}],
         });
 
         if (course) {

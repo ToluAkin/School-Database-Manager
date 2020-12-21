@@ -10,6 +10,7 @@ class UpdateCourse extends Component {
         estimatedTime: '',
         materialsNeeded: '',
         id: this.props.match.params.id,
+        user: [],
         errors: []
     }
 
@@ -30,7 +31,8 @@ class UpdateCourse extends Component {
                         title: response.data.title,
                         description: response.data.description,
                         estimatedTime: response.data.estimatedTime,
-                        materialsNeeded: response.data.materialsNeeded
+                        materialsNeeded: response.data.materialsNeeded,
+                        user: response.data.user
                     })
                 }
             })
@@ -71,7 +73,7 @@ class UpdateCourse extends Component {
                                             onChange={this.change}
                                         />
                                     </div>
-                                    <p>By Joe Smith</p>
+                                    <p>By {this.state.user.firstName} {this.state.user.lastName}</p>
                                 </div>
                                 <div className="course--description">
                                     <div>
