@@ -69,7 +69,7 @@ class CourseDetail extends Component {
                 <div className="actions--bar">
                     <div className="bounds">
                         <div className="grid-100">
-                            { context.authenticatedUser.id === course.userId ?
+                            { context.authenticatedUser && context.authenticatedUser.id === course.userId &&
                                 <span>
                                     <Link className="button" to={`/course-update/${course.id}`}>Update Course</Link>
                                     <button className="button" onClick={(e) => {
@@ -77,9 +77,8 @@ class CourseDetail extends Component {
                                     }}>Delete Course</button>
                                     <Link className="button button-secondary" to="/">Return to List</Link>
                                 </span>
-                            :
-                                <Link className="button button-secondary" to="/">Return to List</Link>
                             }
+                            <Link className="button button-secondary" to="/">Return to List</Link>
                         </div>
                     </div>
                 </div>
