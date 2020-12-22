@@ -12,6 +12,8 @@ In addition, the project will require users to create an account and sign in to 
 5. After installation, run `npm start`. The app should open an instance on the web to view the project.
 6. If a new instance did not open automatically, copy this `http://localhost:3000/` to view the project.
 
-Styles update
+**Styles update**
 1. The font family was imported.
 2. Adjusted spacing around the button.
+3. Updated margin of the links and span on the header.
+4. Updated the font size of the h1, .grid-33, .grid-25, .grid-66 on small screen.

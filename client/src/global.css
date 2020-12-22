@@ -248,7 +248,7 @@ body {
 /* line 37, ../sass/global.sass */
 .header nav a {
   color: rgba(255, 255, 255, 0.5);
-  margin-left: 20px;
+  margin-right: 20px;
 }
 /* line 40, ../sass/global.sass */
 .header nav a:hover {
@@ -279,7 +279,7 @@ body {
 /* line 57, ../sass/global.sass */
 h1 {
   font-size: 36px;
-  margin-bottom: 20px;
+  margin: 0 0 20px 10px;
 }
 
 /* line 61, ../sass/global.sass */
@@ -677,7 +677,7 @@ input:focus {
   font-size: 18px;
   padding: 15px 30px;
   border: 0;
-  margin: 0 10px 10px 0;
+  margin: 0 10px 10px 10px;
   border-radius: 8px;
   font-weight: bold;
   display: inline-block;
@@ -727,7 +727,7 @@ input:focus {
 /* styles the signed in user's name in the header */
 .header nav span {
   color: #fff;
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 /* styles the validation errors */
@@ -743,4 +743,14 @@ input:focus {
 /* reduce bottom margin on the course description textarea element */
 .course--description textarea {
   margin-bottom: 20px;
+}
+
+@media (max-width: 767.98px) {
+  .grid-33, .grid-25, .grid-66 {
+    width: 100%;
+  }
+
+  .course--title--input {
+    font-size: 20px;
+  }
 }
