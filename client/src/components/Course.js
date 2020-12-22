@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor Course handles the course card on the homepage
+ */
 const Course = (props) => {
     return (
         <div className="grid-33">

@@ -1,10 +1,10 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
+import { BrowserRouter as Router,
   Route,
   Switch
 } from 'react-router-dom';
 
+// import components
 import NotFound from "./components/NotFound";
 import Error from "./components/Error";
 import Forbidden from "./components/Forbidden";
@@ -17,6 +17,7 @@ import CreateCourse from "./components/CreateCourse";
 import CourseDetail from "./components/CourseDetail";
 import UpdateCourse from "./components/UpdateCourse";
 
+// import HOC
 import withContext from './Context';
 import PrivateRoute from "./PrivateRoute";
 

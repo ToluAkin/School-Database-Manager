@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
+/**
+ * @class UserSignIn
+ * Handles the signing in of a specified user
+ */
 class UserSignIn extends Component {
-    state = {
-        emailAddress: '',
-        password: '',
-        errors: [],
-    }
+    state = { emailAddress: '', password: '', errors: [] }
 
     render() {
-        const {
-            emailAddress,
-            password,
-            errors,
-        } = this.state;
+        const { emailAddress, password, errors } = this.state;
 
         return (
             <div className="bounds">
@@ -51,6 +47,7 @@ class UserSignIn extends Component {
         );
     }
 
+    // Handles the action when form is edited
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -62,6 +59,7 @@ class UserSignIn extends Component {
         });
     }
 
+    // Handles the action when the form is submitted
     submit = () => {
         const { context } = this.props;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
@@ -86,6 +84,7 @@ class UserSignIn extends Component {
             });
     }
 
+    // Handles the action when the cancel button is clicked
     cancel = () => {
         this.props.history.push('/');
     }

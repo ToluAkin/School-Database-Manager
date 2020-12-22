@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 /* line 7, ../sass/reset.sass */
 a,
 abbr,
@@ -99,6 +100,7 @@ xmp {
 html,
 body {
   height: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 /* line 106, ../sass/reset.sass */
@@ -294,7 +296,6 @@ a {
 
 /* line 66, ../sass/global.sass */
 p {
-  font-family: "Cousine";
   margin-bottom: 30px;
 }
 
@@ -365,12 +366,10 @@ p {
 }
 /* line 116, ../sass/global.sass */
 .course--label {
-  font-family: "Cousine";
   font-size: 14px;
   font-weight: 100;
   color: rgba(255, 255, 255, 0.5);
   margin-bottom: 10px;
-  font-weight: normal;
 }
 /* line 123, ../sass/global.sass */
 .course--title {
@@ -470,12 +469,10 @@ p {
 /* line 198, ../sass/global.sass */
 .course--description li {
   position: relative;
-  padding-left: 30px;
-  padding: 30px 0 30px 5%;
+  padding: 30px 0 30px 30px;
   border-top: 1px solid #ccc;
   font-size: 16px;
   line-height: 1.8;
-  font-family: "Cousine";
 }
 /* line 2, ../sass/mixins.sass */
 .course--description li:before, .course--description li:after {
@@ -540,7 +537,6 @@ p {
 }
 /* line 287, ../sass/global.sass */
 .course--stats--list h4 {
-  font-family: "Cousine";
   font-weight: 100;
   color: #999;
   font-size: 14px;
@@ -555,7 +551,6 @@ p {
 }
 /* line 300, ../sass/global.sass */
 .course--stats--list h3 {
-  font-family: "Work Sans", sans-serif;
   font-size: 18px;
 }
 /* line 303, ../sass/global.sass */
@@ -573,7 +568,6 @@ p {
 }
 /* line 311, ../sass/global.sass */
 .course--time--input {
-  font-family: "Work Sans", sans-serif;
   font-size: 18px;
   font-weight: bold;
   margin: 0;
@@ -598,7 +592,6 @@ textarea {
   color: #666;
   line-height: 1.8;
   outline: none;
-  font-family: "Cousine";
   box-sizing: border-box;
 }
 /* line 29, ../sass/mixins.sass */
@@ -684,7 +677,7 @@ input:focus {
   font-size: 18px;
   padding: 15px 30px;
   border: 0;
-  margin-right: 10px;
+  margin: 0 10px 10px 0;
   border-radius: 8px;
   font-weight: bold;
   display: inline-block;

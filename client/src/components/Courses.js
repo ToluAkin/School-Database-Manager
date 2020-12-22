@@ -4,6 +4,10 @@ import Course from "./Course";
 import config from "../config";
 const axios = require("axios");
 
+/**
+ * @class Courses
+ * Handles the rendering of all the courses in the database
+ */
 class Courses extends Component {
     constructor() {
         super();
@@ -13,10 +17,17 @@ class Courses extends Component {
         };
     }
 
+    /**
+     * Component Lifecycle
+     */
     componentDidMount() {
         this.AllCourses();
     }
 
+    /**
+     * To get all the courses
+     * @constructor
+     */
     AllCourses = () => {
         axios.get(`${config.apiBaseUrl}/courses`)
             .then((response) => {
@@ -33,10 +44,17 @@ class Courses extends Component {
             });
     };
 
+    /**
+     * Renders the elements to render the all courses page
+     * @returns {JSX.Element}
+     */
     render() {
         const data = this.state.courses;
         let courses;
 
+        /**
+         * Check if there is data to be passed to render the course cards
+         */
         if (data && data.length) {
             courses = data.map((course) => (
                 <Course title={course.title} key={course.id} id={course.id} />

@@ -3,6 +3,10 @@ import Form from "./Form";
 import config from "../config";
 const axios = require("axios");
 
+/**
+ * @class UpdateCourse
+ * Handles updating course details
+ */
 class UpdateCourse extends Component {
     state = {
         title: '',
@@ -14,11 +18,17 @@ class UpdateCourse extends Component {
         errors: []
     }
 
+    /**
+     * Component Lifecycle
+     */
     componentDidMount() {
         this.GetCourse();
     }
 
-
+    /**
+     * To get the details of a selected course
+     * @constructor
+     */
     GetCourse = () => {
         const { context } = this.props;
         const id = this.props.match.params.id;
@@ -47,6 +57,10 @@ class UpdateCourse extends Component {
             });
     }
 
+    /**
+     * Renders the elements of the specified course page
+     * @returns {JSX.Element}
+     */
     render() {
         const { title, description, estimatedTime, materialsNeeded, errors } = this.state;
         return (
@@ -128,7 +142,7 @@ class UpdateCourse extends Component {
         );
     }
 
-    // Edit Form
+    // Handles the action when form is edited
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -140,6 +154,7 @@ class UpdateCourse extends Component {
         });
     }
 
+    // Handles the action when the form is submitted
     submit = () => {
         const { context } = this.props;
         const { title, description, estimatedTime, materialsNeeded, id } = this.state;
@@ -163,6 +178,7 @@ class UpdateCourse extends Component {
             })
     }
 
+    // Handles the action when the cancel button is clicked
     cancel = () => {
         this.props.history.push(`/courses/${this.props.match.params.id}`);
     }

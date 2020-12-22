@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import Form from "./Form";
 
+/**
+ * @class CreateCourse
+ * Handles creating a course
+ */
 class CreateCourse extends Component {
     state = {
         title: '',
@@ -10,6 +14,10 @@ class CreateCourse extends Component {
         errors: []
     }
 
+    /**
+     * Handles the rendering of elements needed to render the create course view
+     * @returns {JSX.Element}
+     */
     render() {
         const { context } = this.props;
         const { title, description, estimatedTime, materialsNeeded, errors } = this.state;
@@ -93,7 +101,7 @@ class CreateCourse extends Component {
         );
     }
 
-    // Edit Form
+    // Handles the action when form is edited
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -105,6 +113,7 @@ class CreateCourse extends Component {
         });
     }
 
+    // Handles the action when the form is submitted
     submit = () => {
         const { context } = this.props;
         const { title, description, estimatedTime, materialsNeeded } = this.state;
@@ -131,6 +140,7 @@ class CreateCourse extends Component {
             })
     }
 
+    // Handles the action when the cancel button is clicked
     cancel = () => {
         this.props.history.push('/');
     }

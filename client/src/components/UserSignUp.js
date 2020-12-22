@@ -2,25 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
+/**
+ * @class UserSignUp
+ * Handles signing up a user
+ */
 class UserSignUp extends Component {
-    state = {
-        firstName: '',
-        lastName: '',
-        emailAddress: '',
-        password: '',
-        confirmPassword: '',
-        errors: []
-    }
+    state = { firstName: '', lastName: '', emailAddress: '', password: '', confirmPassword: '', errors: [] }
 
     render() {
-        const {
-            firstName,
-            lastName,
-            emailAddress,
-            password,
-            confirmPassword,
-            errors
-        } = this.state;
+        const { firstName, lastName, emailAddress, password, confirmPassword, errors } = this.state;
 
         return (
             <div className="bounds">
@@ -84,7 +74,7 @@ class UserSignUp extends Component {
         );
     }
 
-    // Edit Form
+    // Handles the action when form is edited
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -96,27 +86,14 @@ class UserSignUp extends Component {
         });
     }
 
-    // Submit Form
+    // Handles the action when the form is submitted
     submit = () => {
         const { context } = this.props;
-        const {
-            firstName,
-            lastName,
-            emailAddress,
-            password,
-            confirmPassword,
-        } = this.state;
+        const { firstName, lastName, emailAddress, password, confirmPassword } = this.state;
 
         // Create User
-        const user =  {
-            firstName,
-            lastName,
-            emailAddress,
-            password,
-            confirmPassword,
-        }
+        const user =  { firstName, lastName, emailAddress, password, confirmPassword }
 
-        console.log(user)
         if (user.password !== user.confirmPassword) {
             this.setState({ errors: ['Password do not match']});
         } else {
@@ -141,6 +118,7 @@ class UserSignUp extends Component {
         }
     }
 
+    // Handles the action when the cancel button is clicked
     cancel = () => {
         this.props.history.push('/');
     }

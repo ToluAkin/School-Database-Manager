@@ -4,6 +4,10 @@ import config from "../config";
 import ReactMarkdown from 'react-markdown'
 const axios = require("axios");
 
+/**
+ * @class CourseDetail
+ * Handles rendering the detail of a course
+ */
 class CourseDetail extends Component {
     constructor() {
         super();
@@ -14,10 +18,17 @@ class CourseDetail extends Component {
         }
     }
 
+    /**
+     * Component Lifecycle
+     */
     componentDidMount() {
         this.GetCourseDetail();
     }
 
+    /**
+     * To get the details of a course and the owner
+     * @constructor
+     */
     GetCourseDetail = () => {
         const id = this.props.match.params.id;
         axios.get(`${config.apiBaseUrl}/courses/${id}`)
@@ -38,6 +49,10 @@ class CourseDetail extends Component {
             });
     }
 
+    /**
+     * The action to delete a course
+     * @param e
+     */
     deleteCourse(e) {
         e.preventDefault();
         const { context } = this.props;
@@ -60,6 +75,10 @@ class CourseDetail extends Component {
             })
     }
 
+    /**
+     * Renders the elements of the course detail page
+     * @returns {JSX.Element}
+     */
     render() {
         const { context } = this.props;
         let course = this.state.courseDetail;
@@ -75,7 +94,6 @@ class CourseDetail extends Component {
                                     <button className="button" onClick={(e) => {
                                         if (window.confirm('Are you sure you want to delete this course?')) this.deleteCourse(e)
                                     }}>Delete Course</button>
-                                    <Link className="button button-secondary" to="/">Return to List</Link>
                                 </span>
                             }
                             <Link className="button button-secondary" to="/">Return to List</Link>

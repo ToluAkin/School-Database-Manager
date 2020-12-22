@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * @class Header
+ * Handles the navigation bar
+ */
 class Header extends React.PureComponent {
     render() {
         const { context } = this.props;
