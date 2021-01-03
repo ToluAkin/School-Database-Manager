@@ -90,7 +90,7 @@ class CourseDetail extends Component {
                         <div className="grid-100">
                             { context.authenticatedUser && context.authenticatedUser.id === course.userId &&
                                 <span>
-                                    <Link className="button" to={`/course-update/${course.id}`}>Update Course</Link>
+                                    <Link className="button" to={`/courses/${course.id}/update`}>Update Course</Link>
                                     <button className="button" onClick={(e) => {
                                         if (window.confirm('Are you sure you want to delete this course?')) this.deleteCourse(e)
                                     }}>Delete Course</button>

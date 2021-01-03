@@ -1,12 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // import components
 import NotFound from "./components/NotFound";
-import Error from "./components/Error";
+import UnhandledError from "./components/UnhandledError";
 import Forbidden from "./components/Forbidden";
 import Header from "./components/Header";
 import UserSignUp from "./components/UserSignUp";
@@ -30,6 +27,10 @@ const CourseDetailWithContext = withContext(CourseDetail)
 const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 
+/**
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function App() {
   return (
       <Router>
@@ -42,10 +43,10 @@ function App() {
               <Route path="/signup" component={UserSignUpWithContext} />
               <Route path="/signout" component={UserSignOutWithContext} />
               <Route path="/courses/:id" component={CourseDetailWithContext} />
-              <PrivateRoute path="/create-course" component={CreateCourseWithContext} />
-              <PrivateRoute path="/course-update/:id" component={UpdateCourseWithContext} />
+              <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
+              <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
               <Route path="/forbidden" component={Forbidden} />
-              <Route path="/error" component={Error} />
+              <Route path="/error" component={UnhandledError} />
               <Route path="/notfound" component={NotFound} />
           </Switch>
         </div>
